@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+class ItemForSale
+{
+    var id = ""
+    var itemName = ""
+    var itemPrice: CGFloat = 0
+    var itemImage: UIImage!
+}

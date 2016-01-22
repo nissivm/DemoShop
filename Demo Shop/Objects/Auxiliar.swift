@@ -54,4 +54,20 @@ class Auxiliar
             vc.presentViewController(alert, animated: true, completion: nil)
         }
     }
+    
+    //--------------------------------------------------------------------------------------//
+    // MARK: Check Parse Session
+    //--------------------------------------------------------------------------------------//
+    
+    static func sessionIsValid() -> Bool
+    {
+        if PFUser.currentUser() != nil
+        {
+            return true
+        }
+        else
+        {
+            return false
+        }
+    }
 }

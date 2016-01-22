@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+class ShoppingCartItem
+{
+    var itemForSale: ItemForSale!
+    var amount: Int = 1
+}

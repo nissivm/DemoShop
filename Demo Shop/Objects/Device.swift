@@ -10,7 +10,7 @@ import Foundation
 
 class Device
 {
-    var IS_IPHONE: Bool {
+    static var IS_IPHONE: Bool {
         get {
             if UIDevice.currentDevice().userInterfaceIdiom == .Phone
             {
@@ -23,7 +23,7 @@ class Device
         }
     }
     
-    var IS_IPHONE_5: Bool {
+    static var IS_IPHONE_5: Bool {
         get {
             if IS_IPHONE && UIScreen.mainScreen().bounds.size.height == 568.0
             {
@@ -36,7 +36,7 @@ class Device
         }
     }
     
-    var IS_IPHONE_6: Bool {
+    static var IS_IPHONE_6: Bool {
         get {
             if IS_IPHONE && UIScreen.mainScreen().bounds.size.height == 667.0
             {
@@ -49,7 +49,7 @@ class Device
         }
     }
     
-    var IS_IPHONE_6_PLUS: Bool {
+    static var IS_IPHONE_6_PLUS: Bool {
         get {
             if IS_IPHONE && UIScreen.mainScreen().bounds.size.height == 736.0
             {
