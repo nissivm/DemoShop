@@ -1,5 +1,5 @@
 # DemoShop
-Shop demo using Stripe as payment gateway. The purchase can be made using Apple Pay or regular Credit Card. Also, uses Parse as backend.
+Shop demo using Stripe as payment gateway. The purchase can be made using Apple Pay or regularly with Credit Card. Also, uses Parse as backend.
 
 <img src="https://cloud.githubusercontent.com/assets/6089173/12519924/6ee4b7ea-c120-11e5-9d2a-853a154856e3.png" alt="Sign Up" width="320" height="568"/>
 <img src="https://cloud.githubusercontent.com/assets/6089173/12519922/6edd73fe-c120-11e5-9e47-8073b42e5b2a.png" alt="Products" width="320" height="568"/>
