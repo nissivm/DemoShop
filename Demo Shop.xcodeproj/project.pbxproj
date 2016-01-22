@@ -20,6 +20,8 @@
 		201B6A4F1C3B03F5004DBD8A /* Stripe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201B6A4E1C3B03F5004DBD8A /* Stripe.framework */; };
 		202FBF691C5277E600E42E4C /* DemoShop-ServerSide.zip in Resources */ = {isa = PBXBuildFile; fileRef = 202FBF671C5277E500E42E4C /* DemoShop-ServerSide.zip */; };
 		202FBF6A1C5277E600E42E4C /* Parse Data.zip in Resources */ = {isa = PBXBuildFile; fileRef = 202FBF681C5277E600E42E4C /* Parse Data.zip */; };
+		202FBF6D1C52AEA600E42E4C /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 202FBF6B1C52AEA600E42E4C /* README.md */; };
+		202FBF6E1C52AEA600E42E4C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 202FBF6C1C52AEA600E42E4C /* LICENSE */; };
 		2055FE481C4A96630094857D /* ItemForSale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2055FE471C4A96630094857D /* ItemForSale.swift */; };
 		2055FE7A1C4AD3880094857D /* shopping-cart-gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 2055FE791C4AD3880094857D /* shopping-cart-gray.png */; };
 		2055FE7F1C4AD7AE0094857D /* ItemForSaleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2055FE7E1C4AD7AE0094857D /* ItemForSaleCell.swift */; };
@@ -81,6 +83,8 @@
 		201B6A501C3B0498004DBD8A /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		202FBF671C5277E500E42E4C /* DemoShop-ServerSide.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "DemoShop-ServerSide.zip"; sourceTree = "<group>"; };
 		202FBF681C5277E600E42E4C /* Parse Data.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "Parse Data.zip"; sourceTree = "<group>"; };
+		202FBF6B1C52AEA600E42E4C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		202FBF6C1C52AEA600E42E4C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		2055FE471C4A96630094857D /* ItemForSale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemForSale.swift; path = Objects/ItemForSale.swift; sourceTree = "<group>"; };
 		2055FE791C4AD3880094857D /* shopping-cart-gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "shopping-cart-gray.png"; path = "Assets/shopping-cart-gray.png"; sourceTree = "<group>"; };
 		2055FE7E1C4AD7AE0094857D /* ItemForSaleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemForSaleCell.swift; path = "Custom Cells/ItemForSaleCell.swift"; sourceTree = "<group>"; };
@@ -147,6 +151,8 @@
 		201B6A211C3AF15B004DBD8A = {
 			isa = PBXGroup;
 			children = (
+				202FBF6B1C52AEA600E42E4C /* README.md */,
+				202FBF6C1C52AEA600E42E4C /* LICENSE */,
 				202FBF671C5277E500E42E4C /* DemoShop-ServerSide.zip */,
 				202FBF681C5277E600E42E4C /* Parse Data.zip */,
 				20EBCC051C4E602F009FE02A /* Podfile */,
@@ -389,6 +395,7 @@
 				201B6A381C3AF15B004DBD8A /* LaunchScreen.storyboard in Resources */,
 				20CE662C1C3D3847003217D3 /* visa.png in Resources */,
 				202FBF6A1C5277E600E42E4C /* Parse Data.zip in Resources */,
+				202FBF6E1C52AEA600E42E4C /* LICENSE in Resources */,
 				20CE662B1C3D3847003217D3 /* mastercard.png in Resources */,
 				2055FE7A1C4AD3880094857D /* shopping-cart-gray.png in Resources */,
 				202FBF691C5277E600E42E4C /* DemoShop-ServerSide.zip in Resources */,
@@ -519,6 +526,7 @@
 				20C7F8361C4914FC0095365B /* ShippingMethods.swift in Sources */,
 				20E8BF7B1C469A3900BF213A /* Device.swift in Sources */,
 				20E0B2341C45A7E700E7B03A /* MBProgressHUD.m in Sources */,
+				202FBF6D1C52AEA600E42E4C /* README.md in Sources */,
 				20C6B4FF1C4BEB410067F388 /* ShoppingCartItemCell.swift in Sources */,
 				20E8BF7D1C469A4A00BF213A /* CardPayment_VC.swift in Sources */,
 				20033EF11C47F8E100CE32F4 /* Products_VC.swift in Sources */,
