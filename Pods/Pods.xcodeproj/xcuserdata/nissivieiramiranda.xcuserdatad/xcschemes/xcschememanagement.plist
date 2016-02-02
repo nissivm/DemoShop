@@ -4,12 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Bolts.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Parse.xcscheme</key>
+		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -19,20 +14,25 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Stripe.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>4CD92797A96766670A60AE5197C5FB82</key>
+		<key>8511BCE45A940128ED77C21F3072E7F3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9B916844F33E8D3CF7BC18CE424E9721</key>
+		<key>94A628DB5C75152405B54611890B008E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D050569D4A698E2E23CF55CCF1AB6188</key>
+		<key>FE2F1D7B9D9FCEA148517E4657B243F4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

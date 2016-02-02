@@ -10,7 +10,6 @@
 #define BridgingHeader_h
 
 #import <Stripe/Stripe.h>
-#import <Parse/Parse.h>
 #import "MBProgressHUD.h"
 
 #endif /* BridgingHeader_h */

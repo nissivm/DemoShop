@@ -16,10 +16,6 @@ class Constants
     // Apple Pay
     static let appleMerchantId = "YOUR MERCHANT ID"
     
-    // Parse
-    static let appId = "YOUR APPLICATION ID"
-    static let clientKey = "YOUR CLIENT KEY"
-    
     // Multipliers
     static let multiplier6: CGFloat = 1.14
     static let multiplier6plus: CGFloat = 1.28

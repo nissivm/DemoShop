@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool
     {
         Stripe.setDefaultPublishableKey(Constants.stripeTestPublishableKey)
-        Parse.setApplicationId(Constants.appId, clientKey: Constants.clientKey)
+        
         return true
     }
 

@@ -1,5 +1,5 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Bolts" "${PODS_ROOT}/Headers/Public/Parse"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/Bolts" -isystem "${PODS_ROOT}/Headers/Public/Parse"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"Bolts" -l"Parse" -l"sqlite3" -l"z" -framework "AudioToolbox" -framework "CFNetwork" -framework "CoreGraphics" -framework "CoreLocation" -framework "QuartzCore" -framework "Security" -framework "StoreKit" -framework "SystemConfiguration" -weak_framework "Accounts" -weak_framework "Social"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/MBProgressHUD" "${PODS_ROOT}/Headers/Public/Stripe"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/MBProgressHUD" -isystem "${PODS_ROOT}/Headers/Public/Stripe"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"MBProgressHUD" -l"Stripe" -framework "CoreGraphics" -framework "Foundation" -framework "Security" -weak_framework "AddressBook" -weak_framework "PassKit"
 PODS_ROOT = ${SRCROOT}/Pods

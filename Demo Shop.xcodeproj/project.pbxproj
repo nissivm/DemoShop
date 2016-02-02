@@ -17,7 +17,6 @@
 		201B6A351C3AF15B004DBD8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 201B6A341C3AF15B004DBD8A /* Assets.xcassets */; };
 		201B6A381C3AF15B004DBD8A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 201B6A361C3AF15B004DBD8A /* LaunchScreen.storyboard */; };
 		201B6A431C3AF15B004DBD8A /* Demo_ShopTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201B6A421C3AF15B004DBD8A /* Demo_ShopTests.swift */; };
-		201B6A4F1C3B03F5004DBD8A /* Stripe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201B6A4E1C3B03F5004DBD8A /* Stripe.framework */; };
 		202FBF691C5277E600E42E4C /* DemoShop-ServerSide.zip in Resources */ = {isa = PBXBuildFile; fileRef = 202FBF671C5277E500E42E4C /* DemoShop-ServerSide.zip */; };
 		202FBF6A1C5277E600E42E4C /* Parse Data.zip in Resources */ = {isa = PBXBuildFile; fileRef = 202FBF681C5277E600E42E4C /* Parse Data.zip */; };
 		202FBF6D1C52AEA600E42E4C /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 202FBF6B1C52AEA600E42E4C /* README.md */; };
@@ -37,8 +36,6 @@
 		20CE662A1C3D3847003217D3 /* jcb.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CE66241C3D3847003217D3 /* jcb.png */; };
 		20CE662B1C3D3847003217D3 /* mastercard.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CE66251C3D3847003217D3 /* mastercard.png */; };
 		20CE662C1C3D3847003217D3 /* visa.png in Resources */ = {isa = PBXBuildFile; fileRef = 20CE66261C3D3847003217D3 /* visa.png */; };
-		20E0B2301C4544F100E7B03A /* Stripe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201B6A4E1C3B03F5004DBD8A /* Stripe.framework */; };
-		20E0B2341C45A7E700E7B03A /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E0B2331C45A7E600E7B03A /* MBProgressHUD.m */; };
 		20E8BF781C469A3900BF213A /* Auxiliar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E8BF741C469A3900BF213A /* Auxiliar.swift */; };
 		20E8BF791C469A3900BF213A /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E8BF751C469A3900BF213A /* Card.swift */; };
 		20E8BF7A1C469A3900BF213A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E8BF761C469A3900BF213A /* Constants.swift */; };
@@ -79,7 +76,6 @@
 		201B6A3E1C3AF15B004DBD8A /* Demo ShopTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Demo ShopTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		201B6A421C3AF15B004DBD8A /* Demo_ShopTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Demo_ShopTests.swift; sourceTree = "<group>"; };
 		201B6A441C3AF15B004DBD8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		201B6A4E1C3B03F5004DBD8A /* Stripe.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Stripe.framework; sourceTree = "<group>"; };
 		201B6A501C3B0498004DBD8A /* BridgingHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgingHeader.h; sourceTree = "<group>"; };
 		202FBF671C5277E500E42E4C /* DemoShop-ServerSide.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "DemoShop-ServerSide.zip"; sourceTree = "<group>"; };
 		202FBF681C5277E600E42E4C /* Parse Data.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "Parse Data.zip"; sourceTree = "<group>"; };
@@ -101,8 +97,6 @@
 		20CE66251C3D3847003217D3 /* mastercard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = mastercard.png; path = "Assets/Card brands/mastercard.png"; sourceTree = "<group>"; };
 		20CE66261C3D3847003217D3 /* visa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = visa.png; path = "Assets/Card brands/visa.png"; sourceTree = "<group>"; };
 		20D992961C47D7D600E167B1 /* Demo Shop.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Demo Shop.entitlements"; sourceTree = "<group>"; };
-		20E0B2321C45A7E600E7B03A /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBProgressHUD.h; path = MBProgressHUD/MBProgressHUD.h; sourceTree = "<group>"; };
-		20E0B2331C45A7E600E7B03A /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBProgressHUD.m; path = MBProgressHUD/MBProgressHUD.m; sourceTree = "<group>"; };
 		20E8BF741C469A3900BF213A /* Auxiliar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Auxiliar.swift; path = Objects/Auxiliar.swift; sourceTree = "<group>"; };
 		20E8BF751C469A3900BF213A /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Card.swift; path = Objects/Card.swift; sourceTree = "<group>"; };
 		20E8BF761C469A3900BF213A /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Constants.swift; path = Objects/Constants.swift; sourceTree = "<group>"; };
@@ -121,7 +115,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				201B6A4F1C3B03F5004DBD8A /* Stripe.framework in Frameworks */,
 				43D96504FEE6C4034FDB2E38 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,7 +123,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				20E0B2301C4544F100E7B03A /* Stripe.framework in Frameworks */,
 				56CB549BD27324D8D0186B58 /* (null) in Frameworks */,
 				5B2BB1C830B342A7B23B23EE /* libPods.a in Frameworks */,
 			);
@@ -156,7 +148,6 @@
 				202FBF671C5277E500E42E4C /* DemoShop-ServerSide.zip */,
 				202FBF681C5277E600E42E4C /* Parse Data.zip */,
 				20EBCC051C4E602F009FE02A /* Podfile */,
-				20E0B2311C45A7BC00E7B03A /* MBProgressHUD */,
 				201B6A2C1C3AF15B004DBD8A /* Demo Shop */,
 				201B6A411C3AF15B004DBD8A /* Demo ShopTests */,
 				201B6A2B1C3AF15B004DBD8A /* Products */,
@@ -205,7 +196,6 @@
 		201B6A4D1C3B03D5004DBD8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				201B6A4E1C3B03F5004DBD8A /* Stripe.framework */,
 				720D020596971FE69843D082 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -245,15 +235,6 @@
 				20CE66261C3D3847003217D3 /* visa.png */,
 			);
 			name = "Card brands";
-			sourceTree = "<group>";
-		};
-		20E0B2311C45A7BC00E7B03A /* MBProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				20E0B2321C45A7E600E7B03A /* MBProgressHUD.h */,
-				20E0B2331C45A7E600E7B03A /* MBProgressHUD.m */,
-			);
-			name = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		20E8BF721C469A0000BF213A /* View Controllers */ = {
@@ -525,7 +506,6 @@
 				20033EF31C4855E800CE32F4 /* Backend.swift in Sources */,
 				20C7F8361C4914FC0095365B /* ShippingMethods.swift in Sources */,
 				20E8BF7B1C469A3900BF213A /* Device.swift in Sources */,
-				20E0B2341C45A7E700E7B03A /* MBProgressHUD.m in Sources */,
 				202FBF6D1C52AEA600E42E4C /* README.md in Sources */,
 				20C6B4FF1C4BEB410067F388 /* ShoppingCartItemCell.swift in Sources */,
 				20E8BF7D1C469A4A00BF213A /* CardPayment_VC.swift in Sources */,
