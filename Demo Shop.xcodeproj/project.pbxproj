@@ -13,6 +13,7 @@
 		20033EF11C47F8E100CE32F4 /* Products_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20033EF01C47F8E100CE32F4 /* Products_VC.swift */; };
 		200408311C6BBA8000DDF97A /* PaymentProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200408301C6BBA8000DDF97A /* PaymentProcessing.swift */; };
 		200F3AEF1C73569000CCCFF0 /* ItemsForSaleFetching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 200F3AEE1C73569000CCCFF0 /* ItemsForSaleFetching.swift */; };
+		200F3AF11C73C6B300CCCFF0 /* phpMyAdmin.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 200F3AF01C73C6B300CCCFF0 /* phpMyAdmin.rtf */; };
 		201B6A2E1C3AF15B004DBD8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 201B6A2D1C3AF15B004DBD8A /* AppDelegate.swift */; };
 		201B6A331C3AF15B004DBD8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 201B6A311C3AF15B004DBD8A /* Main.storyboard */; };
 		201B6A351C3AF15B004DBD8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 201B6A341C3AF15B004DBD8A /* Assets.xcassets */; };
@@ -71,6 +72,7 @@
 		20033EF01C47F8E100CE32F4 /* Products_VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Products_VC.swift; path = "View Controllers/Products_VC.swift"; sourceTree = "<group>"; };
 		200408301C6BBA8000DDF97A /* PaymentProcessing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaymentProcessing.swift; path = Backend/PaymentProcessing.swift; sourceTree = "<group>"; };
 		200F3AEE1C73569000CCCFF0 /* ItemsForSaleFetching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemsForSaleFetching.swift; path = Backend/ItemsForSaleFetching.swift; sourceTree = "<group>"; };
+		200F3AF01C73C6B300CCCFF0 /* phpMyAdmin.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = phpMyAdmin.rtf; sourceTree = "<group>"; };
 		201B6A2A1C3AF15B004DBD8A /* Demo Shop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Demo Shop.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		201B6A2D1C3AF15B004DBD8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		201B6A321C3AF15B004DBD8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 		201B6A211C3AF15B004DBD8A = {
 			isa = PBXGroup;
 			children = (
+				200F3AF01C73C6B300CCCFF0 /* phpMyAdmin.rtf */,
 				202FBF6B1C52AEA600E42E4C /* README.md */,
 				202FBF6C1C52AEA600E42E4C /* LICENSE */,
 				202FBF671C5277E500E42E4C /* DemoShop-ServerSide.zip */,
@@ -393,6 +396,7 @@
 				201B6A381C3AF15B004DBD8A /* LaunchScreen.storyboard in Resources */,
 				20CE662C1C3D3847003217D3 /* visa.png in Resources */,
 				202FBF6E1C52AEA600E42E4C /* LICENSE in Resources */,
+				200F3AF11C73C6B300CCCFF0 /* phpMyAdmin.rtf in Resources */,
 				20CE662B1C3D3847003217D3 /* mastercard.png in Resources */,
 				2055FE7A1C4AD3880094857D /* shopping-cart-gray.png in Resources */,
 				202FBF691C5277E600E42E4C /* DemoShop-ServerSide.zip in Resources */,
