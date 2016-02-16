@@ -1,5 +1,5 @@
 //
-//  Demo_ShopTests.swift
+//  StripeTests.swift
 //  Demo ShopTests
 //
 //  Created by Nissi Vieira Miranda on 1/4/16.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import Demo_Shop
 
-class Demo_ShopTests: XCTestCase
+class StripeTests: XCTestCase
 {
     let card = Card()
     

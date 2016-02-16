@@ -38,7 +38,6 @@ class CardPayment_VC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
     weak var delegate: CardPayment_VC_Delegate?
     
     let card = Card()
-    let auxiliar = Auxiliar()
     let backend = Backend()
     var textFieldInUse: UITextField?
     
@@ -110,23 +109,23 @@ class CardPayment_VC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
     {
         if payButton.enabled
         {
-            Card.cardNumber = cardNumberTxtField.text!
-            Card.expirationDate = expiryTxtField.text!
-            Card.cvc = cvcTxtField.text!
-            
-            let cardParam = card.getCardParams()
-            
-            auxiliar.showLoadingHUDWithText("Processing payment, please wait...", forView: self.view)
+            Auxiliar.showLoadingHUDWithText("Processing payment, please wait...", forView: self.view)
             
             guard Reachability.connectedToNetwork() else
             {
-                auxiliar.hideLoadingHUDInView(self.view)
-                auxiliar.presentAlertControllerWithTitle("No Internet Connection",
+                Auxiliar.hideLoadingHUDInView(self.view)
+                Auxiliar.presentAlertControllerWithTitle("No Internet Connection",
                     andMessage: "Make sure your device is connected to the internet.",
                     forViewController: self)
                 
                 return
             }
+            
+            Card.cardNumber = cardNumberTxtField.text!
+            Card.expirationDate = expiryTxtField.text!
+            Card.cvc = cvcTxtField.text!
+            
+            let cardParam = card.getCardParams()
             
             STPAPIClient.sharedClient().createTokenWithCard(cardParam, completion: {
                 
@@ -134,8 +133,8 @@ class CardPayment_VC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
                 
                 guard error == nil else
                 {
-                    self.auxiliar.hideLoadingHUDInView(self.view)
-                    self.auxiliar.presentAlertControllerWithTitle("Failure",
+                    Auxiliar.hideLoadingHUDInView(self.view)
+                    Auxiliar.presentAlertControllerWithTitle("Failure",
                         andMessage: "Error while processing payment, please try again.", forViewController: self)
                     
                     print("Error = \(error)")
@@ -145,22 +144,23 @@ class CardPayment_VC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
                 
                 guard token != nil else
                 {
-                    self.auxiliar.hideLoadingHUDInView(self.view)
-                    self.auxiliar.presentAlertControllerWithTitle("Failure",
+                    Auxiliar.hideLoadingHUDInView(self.view)
+                    Auxiliar.presentAlertControllerWithTitle("Failure",
                         andMessage: "Error while processing payment, please try again.", forViewController: self)
                     
                     return
                 }
                 
+                self.backend.token = token!
                 self.backend.shoppingCartItems = self.shoppingCartItems
                 self.backend.shippingMethod = self.shippingMethod
                 self.backend.valueToPay = self.valueToPay
                 
-                self.backend.createBackendChargeWithToken(token!) {
+                self.backend.processPayment({
                     
                     [unowned self](status, message) in
                     
-                    self.auxiliar.hideLoadingHUDInView(self.view)
+                    Auxiliar.hideLoadingHUDInView(self.view)
                     
                     if status == "Success"
                     {
@@ -168,9 +168,9 @@ class CardPayment_VC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
                         return
                     }
                     
-                    self.auxiliar.presentAlertControllerWithTitle(status,
+                    Auxiliar.presentAlertControllerWithTitle(status,
                         andMessage: message, forViewController: self)
-                }
+                })
             })
         }
     }
@@ -266,7 +266,7 @@ class CardPayment_VC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
     {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
         
-        let saveAction = UIAlertAction(title: "Ok", style: .Default)
+        let okAction = UIAlertAction(title: "Ok", style: .Default)
         {
             [unowned self](action: UIAlertAction!) -> Void in
             
@@ -274,7 +274,7 @@ class CardPayment_VC: UIViewController, UITextFieldDelegate, UIGestureRecognizer
             self.navigationController!.popToRootViewControllerAnimated(true)
         }
         
-        alert.addAction(saveAction)
+        alert.addAction(okAction)
         
         dispatch_async(dispatch_get_main_queue())
         {

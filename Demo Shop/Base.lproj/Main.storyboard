@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="21v-3e-8S7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="21v-3e-8S7">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <scenes>
         <!--Payment-->
@@ -384,17 +384,6 @@
                                     <outlet property="delegate" destination="Bz0-v4-JEE" id="EPs-lR-Wdy"/>
                                 </connections>
                             </collectionView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No internet connection: No items to show" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p76-Tm-SWO" userLabel="Warn Label">
-                                <rect key="frame" x="10" y="263" width="300" height="42"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="9sy-aE-8eZ"/>
-                                    <constraint firstAttribute="height" constant="42" id="Gwe-A8-5EP"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                <color key="textColor" red="0.364705890417099" green="0.364705890417099" blue="0.364705890417099" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="nds-fT-j1K" userLabel="Buttons Stack View">
                                 <rect key="frame" x="0.0" y="518" width="320" height="50"/>
                                 <subviews>
@@ -446,10 +435,8 @@
                             <constraint firstItem="KLh-76-Bnm" firstAttribute="leading" secondItem="BVh-A2-oPr" secondAttribute="leading" id="ijb-P1-FW6"/>
                             <constraint firstAttribute="trailing" secondItem="nds-fT-j1K" secondAttribute="trailing" id="qUO-dR-HJ4"/>
                             <constraint firstItem="Ivy-KU-Eun" firstAttribute="top" secondItem="BVh-A2-oPr" secondAttribute="top" id="uTj-5l-cQj"/>
-                            <constraint firstItem="p76-Tm-SWO" firstAttribute="centerY" secondItem="BVh-A2-oPr" secondAttribute="centerY" id="urx-r1-7ib"/>
                             <constraint firstItem="nds-fT-j1K" firstAttribute="leading" secondItem="BVh-A2-oPr" secondAttribute="leading" id="vlX-2X-7BV"/>
                             <constraint firstItem="BXa-kK-MpS" firstAttribute="top" secondItem="Ivy-KU-Eun" secondAttribute="bottom" id="vqB-aE-jBN"/>
-                            <constraint firstItem="p76-Tm-SWO" firstAttribute="centerX" secondItem="BVh-A2-oPr" secondAttribute="centerX" id="wHD-Xf-0JU"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="L72-2Z-P2f"/>
@@ -465,7 +452,6 @@
                         <outlet property="shopName" destination="3xs-VO-qqX" id="zxK-ih-YLB"/>
                         <outlet property="shoppingCartButton" destination="0MW-PR-x5c" id="NdH-Xw-Hhw"/>
                         <outlet property="signOutButton" destination="5Ww-ek-lqu" id="b0w-yg-cIX"/>
-                        <outlet property="warnLabel" destination="p76-Tm-SWO" id="fKK-Ko-byV"/>
                         <segue destination="nAG-Pc-Mg4" kind="show" identifier="ToShoppingCart" id="h1o-5t-K14"/>
                     </connections>
                 </viewController>

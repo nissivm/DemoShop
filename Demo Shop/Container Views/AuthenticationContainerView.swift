@@ -28,9 +28,8 @@ class AuthenticationContainerView: UIViewController, UIGestureRecognizerDelegate
     @IBOutlet weak var containerTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerHeightConstraint: NSLayoutConstraint!
     
-    var user : PFUser?
     var tappedTextField : UITextField?
-    let auxiliar = Auxiliar()
+    let backend = Backend()
     var multiplier: CGFloat = 1
     
     override func viewDidLoad()
@@ -56,155 +55,131 @@ class AuthenticationContainerView: UIViewController, UIGestureRecognizerDelegate
     }
     
     //-------------------------------------------------------------------------//
-    // MARK: Parse Sign Up
+    // MARK: Sign Up
     //-------------------------------------------------------------------------//
     
     @IBAction func signUpButtonTapped(sender: UIButton)
     {
-        if Reachability.connectedToNetwork()
+        guard Reachability.connectedToNetwork() else
         {
-            let name = nameTxtField.text!
-            let username = usernameTxtField.text!
-            let password = passwordTxtField.text!
-            let email = emailTxtField.text!
-            
-            if name.characters.count > 0 &&
-               username.characters.count > 0 &&
-               password.characters.count > 0 &&
-               email.characters.count > 0
-            {
-                auxiliar.showLoadingHUDWithText("Signing up...", forView: self.view)
-                signUpWithParse(name, username: username, password: password, email: email)
-            }
-            else
-            {
-                auxiliar.presentAlertControllerWithTitle("Error",
-                    andMessage: "Please fill in all fields", forViewController: self)
-            }
+            Auxiliar.presentAlertControllerWithTitle("No Internet Connection",
+                andMessage: "Make sure your device is connected to the internet.",
+                forViewController: self)
+            return
+        }
+        
+        let name = nameTxtField.text!
+        let username = usernameTxtField.text!
+        let password = passwordTxtField.text!
+        let email = emailTxtField.text!
+        
+        if name.characters.count > 0 &&
+            username.characters.count > 0 &&
+            password.characters.count > 0 &&
+            email.characters.count > 0
+        {
+            Auxiliar.showLoadingHUDWithText("Signing up...", forView: self.view)
+            signUp(name, username: username, password: password, email: email)
         }
         else
         {
-            auxiliar.presentAlertControllerWithTitle("No Internet Connection",
-                andMessage: "Make sure your device is connected to the internet.",
-                forViewController: self)
+            Auxiliar.presentAlertControllerWithTitle("Error",
+                andMessage: "Please fill in all fields", forViewController: self)
         }
     }
     
-    func signUpWithParse(name: String, username: String, password: String, email: String)
+    func signUp(name: String, username: String, password: String, email: String)
     {
-        let user = PFUser()
-            user.setObject(name, forKey: "name")
-            user.username = username
-            user.password = password
-            user.email = email
+        backend.name = name
+        backend.username = username
+        backend.password = password
+        backend.email = email
         
-        user.signUpInBackgroundWithBlock
+        backend.registerUser({
+            
+            [unowned self](status, message) -> Void in
+            
+            dispatch_async(dispatch_get_main_queue())
             {
-                [unowned self](succeeded, error) -> Void in
+                Auxiliar.hideLoadingHUDInView(self.view)
                 
-                self.auxiliar.hideLoadingHUDInView(self.view)
-                
-                guard error == nil else
+                if status == "Success"
                 {
-                    print("Error signing up in Parse")
-                    print("Error code: \(error!.code)")
+                    self.nameTxtField.text = ""
+                    self.usernameTxtField.text = ""
+                    self.passwordTxtField.text = ""
+                    self.emailTxtField.text = ""
                     
-                    var msg = ""
-                    if error!.code == 202 // Username taken
-                    {
-                        let errorString = error!.userInfo["error"] as! String
-                        msg = "Sign up error: \(errorString)"
-                    }
-                    else if error!.code == 203 // Email taken
-                    {
-                        let errorString = error!.userInfo["error"] as! String
-                        msg = "Sign up error: \(errorString)"
-                    }
-                    else
-                    {
-                        msg = "An error occurred while signing up, please try again later."
-                    }
-                    
-                    self.auxiliar.presentAlertControllerWithTitle("Error", andMessage: msg,
-                        forViewController: self)
+                    NSNotificationCenter.defaultCenter().postNotificationName("SessionStarted", object: nil)
                     return
                 }
                 
-                self.nameTxtField.text = ""
-                self.usernameTxtField.text = ""
-                self.passwordTxtField.text = ""
-                self.emailTxtField.text = ""
-                
-                NSNotificationCenter.defaultCenter().postNotificationName("SessionStarted", object: nil)
+                Auxiliar.presentAlertControllerWithTitle(status,
+                    andMessage: message,
+                    forViewController: self)
             }
+        })
     }
     
     //-------------------------------------------------------------------------//
-    // MARK: Parse Sign In
+    // MARK: Sign In
     //-------------------------------------------------------------------------//
     
     @IBAction func signInButtonTapped(sender: UIButton)
     {
-        if Reachability.connectedToNetwork()
+        guard Reachability.connectedToNetwork() else
         {
-            let username = usernameTxtField.text!
-            let password = passwordTxtField.text!
-            
-            if username.characters.count > 0 &&
-               password.characters.count > 0
-            {
-                auxiliar.showLoadingHUDWithText("Signing in...", forView: self.view)
-                signInWithParse(username, password: password)
-            }
-            else
-            {
-                auxiliar.presentAlertControllerWithTitle("Error",
-                    andMessage: "Please insert username and password", forViewController: self)
-            }
+            Auxiliar.presentAlertControllerWithTitle("No Internet Connection",
+                andMessage: "Make sure your device is connected to the internet.",
+                forViewController: self)
+            return
+        }
+        
+        let username = usernameTxtField.text!
+        let password = passwordTxtField.text!
+        
+        if username.characters.count > 0 &&
+            password.characters.count > 0
+        {
+            Auxiliar.showLoadingHUDWithText("Signing in...", forView: self.view)
+            signIn(username, password: password)
         }
         else
         {
-            auxiliar.presentAlertControllerWithTitle("No Internet Connection",
-                andMessage: "Make sure your device is connected to the internet.",
-                forViewController: self)
+            Auxiliar.presentAlertControllerWithTitle("Error",
+                andMessage: "Please insert username and password", forViewController: self)
         }
     }
     
-    func signInWithParse(username: String, password: String)
+    func signIn(username: String, password: String)
     {
-        PFUser.logInWithUsernameInBackground(username, password: password)
+        backend.username = username
+        backend.password = password
+        
+        backend.signInUser({
+            
+            [unowned self](status, message) -> Void in
+            
+            dispatch_async(dispatch_get_main_queue())
             {
-                [unowned self](user, error) -> Void in
+                Auxiliar.hideLoadingHUDInView(self.view)
                 
-                self.auxiliar.hideLoadingHUDInView(self.view)
-                
-                guard error == nil else
+                if status == "Success"
                 {
-                    print("Error logging in in Parse")
-                    print("Error code: \(error!.code)")
+                    self.nameTxtField.text = ""
+                    self.usernameTxtField.text = ""
+                    self.passwordTxtField.text = ""
+                    self.emailTxtField.text = ""
                     
-                    var msg = ""
-                    if error!.code == 101
-                    {
-                        msg = "Wrong username or password"
-                    }
-                    else
-                    {
-                        msg = "An error occurred while logging in, please try again later."
-                    }
-                    
-                    self.auxiliar.presentAlertControllerWithTitle("Error", andMessage: msg,
-                        forViewController: self)
+                    NSNotificationCenter.defaultCenter().postNotificationName("SessionStarted", object: nil)
                     return
                 }
                 
-                self.nameTxtField.text = ""
-                self.usernameTxtField.text = ""
-                self.passwordTxtField.text = ""
-                self.emailTxtField.text = ""
-                
-                NSNotificationCenter.defaultCenter().postNotificationName("SessionStarted", object: nil)
+                Auxiliar.presentAlertControllerWithTitle(status,
+                    andMessage: message,
+                    forViewController: self)
             }
+        })
     }
     
     //-------------------------------------------------------------------------//

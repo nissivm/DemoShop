@@ -11,7 +11,6 @@ import UIKit
 class Products_VC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, ItemForSaleCellDelegate, ShoppingCart_VC_Delegate
 {
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var warnLabel: UILabel!
     @IBOutlet weak var shoppingCartButton: UIButton!
     @IBOutlet weak var authenticationContainerView: UIView!
     
@@ -21,9 +20,9 @@ class Products_VC: UIViewController, UICollectionViewDataSource, UICollectionVie
     @IBOutlet weak var signOutButton: UIButton!
     @IBOutlet weak var buttonsStackViewHeightConstraint: NSLayoutConstraint!
     
-    let auxiliar = Auxiliar()
     var itemsForSale = [ItemForSale]()
     var shoppingCartItems = [ShoppingCartItem]()
+    let backend = Backend()
     var multiplier: CGFloat = 1
     
     override func viewDidLoad()
@@ -49,8 +48,12 @@ class Products_VC: UIViewController, UICollectionViewDataSource, UICollectionVie
         
         if Auxiliar.sessionIsValid()
         {
-            authenticationContainerView.hidden = true
-            retrieveProducts()
+            dispatch_async(dispatch_get_main_queue())
+            {
+                self.authenticationContainerView.hidden = true
+                self.backend.offset = 1
+                self.retrieveProducts()
+            }
         }
     }
     
@@ -70,15 +73,7 @@ class Products_VC: UIViewController, UICollectionViewDataSource, UICollectionVie
     
     func willEnterForeground()
     {
-        if Auxiliar.sessionIsValid()
-        {
-            if warnLabel.hidden == false
-            {
-                warnLabel.hidden = true
-                retrieveProducts()
-            }
-        }
-        else
+        if Auxiliar.sessionIsValid() == false
         {
             authenticationContainerView.hidden = false
         }
@@ -86,16 +81,15 @@ class Products_VC: UIViewController, UICollectionViewDataSource, UICollectionVie
     
     func sessionStarted()
     {
-        authenticationContainerView.hidden = true
-        
-        if warnLabel.hidden == false
+        dispatch_async(dispatch_get_main_queue())
         {
-            warnLabel.hidden = true
-        }
-        
-        if itemsForSale.count == 0
-        {
-            retrieveProducts()
+            self.authenticationContainerView.hidden = true
+            
+            if self.itemsForSale.count == 0
+            {
+                self.backend.offset = 1
+                self.retrieveProducts()
+            }
         }
     }
     
@@ -113,39 +107,14 @@ class Products_VC: UIViewController, UICollectionViewDataSource, UICollectionVie
     
     @IBAction func signOutButtonTapped(sender: UIButton)
     {
-        guard Reachability.connectedToNetwork() else
-        {
-            auxiliar.presentAlertControllerWithTitle("No Internet Connection",
-                andMessage: "Make sure your device is connected to the internet.",
-                forViewController: self)
-            return
-        }
+        let defaults = NSUserDefaults.standardUserDefaults()
+        var currentUser = defaults.dictionaryForKey("currentUser")!
+            currentUser["sessionStatus"] = "invalid"
         
-        auxiliar.showLoadingHUDWithText("Signing out...", forView: self.view)
+        defaults.setObject(currentUser, forKey: "currentUser")
+        defaults.synchronize()
         
-        PFUser.logOutInBackgroundWithBlock {
-            
-            [unowned self](error) -> Void in
-            
-            self.auxiliar.hideLoadingHUDInView(self.view)
-            
-            if error == nil
-            {
-                self.authenticationContainerView.hidden = false
-                
-                if self.shoppingCartItems.count > 0
-                {
-                    self.shoppingCartItems.removeAll()
-                    self.shoppingCartButton.enabled = false
-                }
-            }
-            else
-            {
-                let msg = "An error occurred, please try again later"
-                self.auxiliar.presentAlertControllerWithTitle("Error", andMessage: msg,
-                    forViewController: self)
-            }
-        }
+        authenticationContainerView.hidden = false
     }
     
     //-------------------------------------------------------------------------//
@@ -154,51 +123,43 @@ class Products_VC: UIViewController, UICollectionViewDataSource, UICollectionVie
     
     func retrieveProducts()
     {
-        auxiliar.showLoadingHUDWithText("Retrieving products...", forView: self.view)
+        Auxiliar.showLoadingHUDWithText("Retrieving products...", forView: self.view)
         
-        ParseAPI.retrieveItemsForSale({
+        backend.fetchItemsForSale({
             
-            [unowned self](items, noConnection) -> Void in
+            [unowned self](status, returnData) -> Void in
             
-            self.auxiliar.hideLoadingHUDInView(self.view)
-            
-            if let items = items
+            if let returnData = returnData
             {
-                if self.searchingMore
+                var items = [ItemForSale]()
+                
+                for dic in returnData
                 {
-                    self.searchingMore = false
+                    let id = dic["id"] as! Int
+                    let itemName = dic["item_name"] as! String
+                    let itemPriceStr = dic["item_price"] as! String
+                    let itemPriceNumber = NSNumberFormatter().numberFromString(itemPriceStr)!
+                    let itemPrice = CGFloat(itemPriceNumber)
+                    let imageAddr = dic["image_addr"] as! String
+                    let imageURL : NSURL = NSURL(string: imageAddr)!
                     
-                    if items.count > 0
-                    {
-                        self.incorporateNewSearchItems(items)
-                    }
-                    else
-                    {
-                        self.hasMoreToShow = false
-                    }
-                }
-                else // First set of products
-                {
-                    self.itemsForSale = items
-                    self.collectionView.reloadData()
-                }
-            }
-            else
-            {
-                if self.searchingMore == false // First set of products
-                {
-                    var message = "Server error: No items to show"
+                    let item = ItemForSale()
+                        item.id = "\(id)"
+                        item.itemName = itemName
+                        item.itemPrice = itemPrice
+                        item.itemImage = UIImage(data: NSData(contentsOfURL: imageURL)!)
                     
-                    if noConnection
-                    {
-                        message = "No internet connection: No items to show"
-                    }
-                    
-                    self.warnLabel.hidden = false
-                    self.warnLabel.text = message
+                    items.append(item)
                 }
                 
-                self.searchingMore = false
+                dispatch_async(dispatch_get_main_queue())
+                {
+                    self.incorporateNewSearchItems(items)
+                }
+            }
+            else if status == "No results"
+            {
+                self.hasMoreToShow = false
             }
         })
     }
@@ -217,6 +178,7 @@ class Products_VC: UIViewController, UICollectionViewDataSource, UICollectionVie
             if (searchingMore == false) && hasMoreToShow
             {
                 searchingMore = true
+                backend.offset += 6
                 retrieveProducts()
             }
         }
@@ -249,6 +211,8 @@ class Products_VC: UIViewController, UICollectionViewDataSource, UICollectionVie
                 self.collectionView.insertItemsAtIndexPaths(newItems)
             }){
                 completed in
+                
+                Auxiliar.hideLoadingHUDInView(self.view)
             }
     }
     
@@ -338,7 +302,7 @@ class Products_VC: UIViewController, UICollectionViewDataSource, UICollectionVie
             shoppingCartItems.append(cartItem)
         }
         
-        auxiliar.presentAlertControllerWithTitle("Item added!",
+        Auxiliar.presentAlertControllerWithTitle("Item added!",
             andMessage: message, forViewController: self)
     }
     
@@ -372,15 +336,6 @@ class Products_VC: UIViewController, UICollectionViewDataSource, UICollectionVie
             constraint.constant *= multiplier
         }
         
-        for constraint in warnLabel.constraints
-        {
-            if (constraint.firstAttribute == .Height) ||
-               (constraint.firstAttribute == .Width)
-            {
-                constraint.constant *= multiplier
-            }
-        }
-        
         headerHeightConstraint.constant *= multiplier
         buttonsStackViewHeightConstraint.constant *= multiplier
         
@@ -389,7 +344,6 @@ class Products_VC: UIViewController, UICollectionViewDataSource, UICollectionVie
         
         fontSize = 17.0 * multiplier
         signOutButton.titleLabel!.font =  UIFont(name: "HelveticaNeue-Bold", size: fontSize)
-        warnLabel.font =  UIFont(name: "HelveticaNeue", size: fontSize)
         
         shoppingCartButton.imageEdgeInsets = UIEdgeInsetsMake(10 * multiplier, 64 * multiplier,
                                                               10 * multiplier, 64 * multiplier)

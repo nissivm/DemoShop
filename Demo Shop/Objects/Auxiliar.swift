@@ -14,7 +14,7 @@ class Auxiliar
     // MARK: MBProgressHUD
     //-------------------------------------------------------------------------//
     
-    func showLoadingHUDWithText(labelText : String, forView view : UIView)
+    static func showLoadingHUDWithText(labelText : String, forView view : UIView)
     {
         dispatch_async(dispatch_get_main_queue())
         {
@@ -23,7 +23,7 @@ class Auxiliar
         }
     }
     
-    func hideLoadingHUDInView(view : UIView)
+    static func hideLoadingHUDInView(view : UIView)
     {
         dispatch_async(dispatch_get_main_queue())
         {
@@ -35,7 +35,7 @@ class Auxiliar
     // MARK: "Ok" Alert Controller
     //--------------------------------------------------------------------------------------//
     
-    func presentAlertControllerWithTitle(title : String,
+    static func presentAlertControllerWithTitle(title : String,
                             andMessage message : String,
                           forViewController vc : UIViewController)
     {
@@ -56,18 +56,43 @@ class Auxiliar
     }
     
     //--------------------------------------------------------------------------------------//
-    // MARK: Check Parse Session
+    // MARK: Check Session
     //--------------------------------------------------------------------------------------//
     
     static func sessionIsValid() -> Bool
     {
-        if PFUser.currentUser() != nil
-        {
-            return true
-        }
-        else
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let currentUser = defaults.dictionaryForKey("currentUser")
+        
+        if currentUser == nil
         {
             return false
         }
+        
+        let sessionStatus = currentUser!["sessionStatus"] as! String
+        
+        if sessionStatus == "invalid"
+        {
+            return false
+        }
+        
+        let sessionStart = currentUser!["sessionStart"] as! Int
+        let currentDate = NSDate()
+        let interval = Int(currentDate.timeIntervalSince1970) - sessionStart
+        let maxSessionLenght = (60 * 60) * 24 // 24 hours
+        
+        if interval >= maxSessionLenght
+        {
+            return false
+        }
+        
+        let fiveMins = 60 * 5
+        
+        if (maxSessionLenght - interval) <= fiveMins
+        {
+            return false
+        }
+        
+        return true
     }
 }

@@ -35,7 +35,6 @@ class ShoppingCart_VC: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     weak var delegate: ShoppingCart_VC_Delegate?
     
-    let auxiliar = Auxiliar()
     let backend = Backend()
     let shippingMethods = ShippingMethods()
     var multiplier: CGFloat = 1
@@ -260,12 +259,12 @@ class ShoppingCart_VC: UIViewController, UITableViewDataSource, UITableViewDeleg
     {
         dismissViewControllerAnimated(true, completion: nil)
         
-        auxiliar.showLoadingHUDWithText("Processing payment, please wait...", forView: self.view)
+        Auxiliar.showLoadingHUDWithText("Processing payment, please wait...", forView: self.view)
         
         guard Reachability.connectedToNetwork() else
         {
-            auxiliar.hideLoadingHUDInView(self.view)
-            auxiliar.presentAlertControllerWithTitle("No Internet Connection",
+            Auxiliar.hideLoadingHUDInView(self.view)
+            Auxiliar.presentAlertControllerWithTitle("No Internet Connection",
                 andMessage: "Make sure your device is connected to the internet.",
                 forViewController: self)
             
@@ -279,8 +278,8 @@ class ShoppingCart_VC: UIViewController, UITableViewDataSource, UITableViewDeleg
             
             guard error == nil else
             {
-                self.auxiliar.hideLoadingHUDInView(self.view)
-                self.auxiliar.presentAlertControllerWithTitle("Failure",
+                Auxiliar.hideLoadingHUDInView(self.view)
+                Auxiliar.presentAlertControllerWithTitle("Failure",
                     andMessage: "Error while processing payment, please try again.", forViewController: self)
                 
                 print("Error = \(error)")
@@ -291,23 +290,24 @@ class ShoppingCart_VC: UIViewController, UITableViewDataSource, UITableViewDeleg
             
             guard token != nil else
             {
-                self.auxiliar.hideLoadingHUDInView(self.view)
-                self.auxiliar.presentAlertControllerWithTitle("Failure",
+                Auxiliar.hideLoadingHUDInView(self.view)
+                Auxiliar.presentAlertControllerWithTitle("Failure",
                     andMessage: "Error while processing payment, please try again.", forViewController: self)
                 
                 completion(PKPaymentAuthorizationStatus.Failure)
                 return
             }
             
+            self.backend.token = token!
             self.backend.shoppingCartItems = self.shoppingCartItems
             self.backend.shippingMethod = self.getChoosenShippingMethod()
             self.backend.valueToPay = self.valueToPay
             
-            self.backend.createBackendChargeWithToken(token!) {
+            self.backend.processPayment({
                 
                 [unowned self](status, message) in
                 
-                self.auxiliar.hideLoadingHUDInView(self.view)
+                Auxiliar.hideLoadingHUDInView(self.view)
                 
                 if status == "Success"
                 {
@@ -316,10 +316,11 @@ class ShoppingCart_VC: UIViewController, UITableViewDataSource, UITableViewDeleg
                     return
                 }
                 
-                self.auxiliar.presentAlertControllerWithTitle(status,
+                Auxiliar.presentAlertControllerWithTitle(status,
                     andMessage: message, forViewController: self)
+                
                 completion(PKPaymentAuthorizationStatus.Failure)
-            }
+            })
         }
     }
     
