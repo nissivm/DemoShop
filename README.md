@@ -1,5 +1,5 @@
 # DemoShop
-Shop demo using Stripe as payment gateway. The purchase can be made using Apple Pay or regularly with Credit Card. Also, uses Parse as backend.
+Shop demo using Stripe as payment gateway. The purchase can be made using Apple Pay or regularly with Credit Card. Also, uses a PHP+MySql backend.
 
 <img src="https://cloud.githubusercontent.com/assets/6089173/12519924/6ee4b7ea-c120-11e5-9d2a-853a154856e3.png" alt="Sign Up" width="320" height="568"/>
 <img src="https://cloud.githubusercontent.com/assets/6089173/12519922/6edd73fe-c120-11e5-9e47-8073b42e5b2a.png" alt="Products" width="320" height="568"/>
@@ -24,25 +24,14 @@ APPLE PAY SETUP:
 - Create a development provisioning profile and sign the app with it.
 - Go to project target and select your Merchant ID in Capabilities tab.
 
-PARSE SETUP:
-- Sign up in Parse and create an App.
-- Input your credentials on Constants class, in the project.
-- In the dashboard, go to Core and click on "Create a class".
-- On type of class, select "User".
-- Add column "name" to User class.
-
-- Create class "ItemForSale".
-- Add columns "position"(Number), "itemName"(String), "itemPrice"(Number) and "itemImage"(File).
-- Fill the cells with the data contained in Parse Data folder:
-	position fields => first row: 1, second row: 2 etc.
-	objectId fields => double click inside the field and, when the cursor shows, click outside.
-	itemImage fields => double click inside the field and a blue "Upload file" button will show. 
-
-- Create class "Order" and add columns "chargeId"(String), "clientId"(String), "description"(String) and "chargeAmount"(Number).
+BACKEND SETUP:
+- Install Xamp.
+- In the web browser, go to phpMyAdmin (http://localhost/phpmyadmin/).
+- Create a new database called "shop_manager".
+- Enter shop_manager and create 3 tables using the queries in phpMyAdmin.rtf.
+- Fill items_for_sale table with the data in items_for_sale.json, in the same order as showed in the json file.
 
 TO TEST:
-- Install Xamp, normally it is installed under the “Applications” folder.
-- Close Xamp if open.
 - Insert DemoShop-ServerSide folder (unzipped) in Applications/XAMPP/htdocs folder.
 - Open Xamp, open Manage Servers tab and click "Start All".
 
