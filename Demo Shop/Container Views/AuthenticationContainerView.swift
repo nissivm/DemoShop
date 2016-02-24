@@ -39,16 +39,20 @@ class AuthenticationContainerView: UIViewController, UIGestureRecognizerDelegate
         let tapRecognizer = UITapGestureRecognizer(target: self, action:Selector("handleTap:"))
             tapRecognizer.delegate = self
         tapView.addGestureRecognizer(tapRecognizer)
+        
+        if Device.IS_IPHONE_4 || Device.IS_IPHONE_6 || Device.IS_IPHONE_6_PLUS
+        {
+            containerHeightConstraint.constant = self.view.frame.size.height
+        }
 
         if Device.IS_IPHONE_6
         {
-            containerHeightConstraint.constant = self.view.frame.size.height
             multiplier = Constants.multiplier6
             adjustForBiggerScreen()
         }
-        else if Device.IS_IPHONE_6_PLUS
+        
+        if Device.IS_IPHONE_6_PLUS
         {
-            containerHeightConstraint.constant = self.view.frame.size.height
             multiplier = Constants.multiplier6plus
             adjustForBiggerScreen()
         }

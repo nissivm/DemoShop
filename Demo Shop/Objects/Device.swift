@@ -23,6 +23,19 @@ class Device
         }
     }
     
+    static var IS_IPHONE_4: Bool {
+        get {
+            if IS_IPHONE && UIScreen.mainScreen().bounds.size.height == 480.0
+            {
+                return true
+            }
+            else
+            {
+                return false
+            }
+        }
+    }
+    
     static var IS_IPHONE_5: Bool {
         get {
             if IS_IPHONE && UIScreen.mainScreen().bounds.size.height == 568.0
