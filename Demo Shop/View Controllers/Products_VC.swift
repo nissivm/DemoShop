@@ -125,6 +125,12 @@ class Products_VC: UIViewController, UICollectionViewDataSource, UICollectionVie
     {
         Auxiliar.showLoadingHUDWithText("Retrieving products...", forView: self.view)
         
+        guard Reachability.connectedToNetwork() else
+        {
+            Auxiliar.hideLoadingHUDInView(self.view)
+            return
+        }
+        
         backend.fetchItemsForSale({
             
             [unowned self](status, returnData) -> Void in
@@ -159,6 +165,8 @@ class Products_VC: UIViewController, UICollectionViewDataSource, UICollectionVie
             }
             else if status == "No results"
             {
+                Auxiliar.hideLoadingHUDInView(self.view)
+                self.searchingMore = false
                 self.hasMoreToShow = false
             }
         })
@@ -213,6 +221,7 @@ class Products_VC: UIViewController, UICollectionViewDataSource, UICollectionVie
                 completed in
                 
                 Auxiliar.hideLoadingHUDInView(self.view)
+                self.searchingMore = false
             }
     }
     
